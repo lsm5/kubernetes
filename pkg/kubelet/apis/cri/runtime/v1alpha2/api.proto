@@ -1239,6 +1239,12 @@ message ContainerStats {
     MemoryUsage memory = 3;
     // Usage of the writeable layer.
     FilesystemUsage writable_layer = 4;
+    // Network usage gathered from the container.
+    NetworkUsage network = 5;
+    // Block IO gathered from the container.
+    BlockIO block = 6;
+    // Number of PIDs
+    PID process = 7;
 }
 
 // CpuUsage provides the CPU usage information.
@@ -1255,6 +1261,31 @@ message MemoryUsage {
     int64 timestamp = 1;
     // The amount of working set memory in bytes.
     UInt64Value working_set_bytes = 2;
+}
+
+message NetworkUsage {
+   // Timestamp in nanoseconds at which the information were collected. Must be > 0.
+   int64 timestamp = 1;
+   // The amount of input bytes on the network.
+   int64 net_input = 2;
+   // The amount of bytes output on the network.
+   int64 net_output = 3;
+}
+
+message BlockIO {
+   // Timestamp in nanoseconds at which the information were collected. Must be > 0.
+   int64 timestamp = 1;
+   // The amount of block input.
+   int64 block_input = 2;
+   // The amount of block output.
+   int64 block_output = 3;
+}
+
+message PID {
+   // Timestamp in nanoseconds at which the information were collected. Must be > 0.
+   int64 timestamp = 1;
+   // Total number of PIDs;
+   int64 process_ids = 2;
 }
 
 message ReopenContainerLogRequest {
